@@ -13,6 +13,7 @@ Usage
     python top10_diseases_dashboard.py out.xlsx  # custom output path
 """
 
+import io
 import sys
 from collections import OrderedDict
 from pathlib import Path
@@ -480,6 +481,20 @@ def _build_dashboard(wb: Workbook):
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+def generate_dashboard_bytes() -> bytes:
+    """Create the Excel workbook and return it as raw bytes.
+
+    This is useful for serving the file via a web UI download button
+    without writing to disk.
+    """
+    wb = Workbook()
+    _build_data_sheet(wb)
+    _build_dashboard(wb)
+    buf = io.BytesIO()
+    wb.save(buf)
+    return buf.getvalue()
+
+
 def generate_dashboard(output_path: str = "top10_diseases_dashboard.xlsx"):
     """Create the Excel workbook and save to *output_path*."""
     wb = Workbook()

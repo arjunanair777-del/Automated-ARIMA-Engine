@@ -88,7 +88,28 @@ top 10 diseases in the world (WHO Global Health Estimates), including:
 - **Dashboard sheet** – KPI summary cards, bar chart (annual deaths), pie chart
   (share of deaths), and a category breakdown table
 
+### How to download
+
+**Option 1 – Web UI (recommended):**  
+Run the Streamlit app and click the **⬇️ Download Excel Dashboard** button in
+the sidebar:
+
 ```bash
-python top10_diseases_dashboard.py                # default output file
-python top10_diseases_dashboard.py custom_name.xlsx  # custom output path
+streamlit run app.py
+```
+
+**Option 2 – Command line:**
+
+```bash
+python top10_diseases_dashboard.py                   # saves to current directory
+python top10_diseases_dashboard.py custom_name.xlsx   # custom output path
+```
+
+**Option 3 – Python API:**
+
+```python
+from top10_diseases_dashboard import generate_dashboard, generate_dashboard_bytes
+
+generate_dashboard("my_report.xlsx")   # save to file
+xlsx_bytes = generate_dashboard_bytes() # get raw bytes (e.g. for a web response)
 ```
