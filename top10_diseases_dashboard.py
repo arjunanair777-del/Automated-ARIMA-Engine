@@ -14,6 +14,7 @@ Usage
 """
 
 import sys
+from collections import OrderedDict
 from pathlib import Path
 
 from openpyxl import Workbook
@@ -172,7 +173,7 @@ PIE_COLORS = [
 ]
 
 
-def _col_widths(ws):
+def _auto_fit_column_widths(ws):
     """Auto-fit rough column widths."""
     for col_cells in ws.columns:
         max_len = 0
@@ -280,7 +281,7 @@ def _build_data_sheet(wb: Workbook):
     note.font = Font(name="Calibri", italic=True, size=9, color="808080")
     note.alignment = LEFT
 
-    _col_widths(ws)
+    _auto_fit_column_widths(ws)
     # Override a couple of widths for readability
     ws.column_dimensions["B"].width = 35
     ws.column_dimensions["D"].width = 18
@@ -442,8 +443,6 @@ def _build_dashboard(wb: Workbook):
         cell.border = THIN_BORDER
 
     # Aggregate by category
-    from collections import OrderedDict
-
     cat_agg = OrderedDict()
     for d in DISEASES:
         cat = d["category"]
