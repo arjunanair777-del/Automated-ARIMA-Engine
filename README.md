@@ -77,3 +77,18 @@ forecast = engine.forecast(steps=12)
 ```bash
 python auto_arima_engine.py path/to/series.csv --column value --criterion bic --forecast-steps 12
 ```
+
+## Top 10 Diseases Dashboard
+
+Generate an Excel workbook (`top10_diseases_dashboard.xlsx`) with data on the
+top 10 diseases in the world (WHO Global Health Estimates), including:
+
+- **Data sheet** – formatted table with rank, disease name, category, annual
+  deaths, prevalence, trend, and primary region
+- **Dashboard sheet** – KPI summary cards, bar chart (annual deaths), pie chart
+  (share of deaths), and a category breakdown table
+
+```bash
+python top10_diseases_dashboard.py                # default output file
+python top10_diseases_dashboard.py custom_name.xlsx  # custom output path
+```

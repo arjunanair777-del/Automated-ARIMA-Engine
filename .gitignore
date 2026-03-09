@@ -1,0 +1,14 @@
+# Generated files
+*.xlsx
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.eggs/
+*.egg-info/
+
+# Virtual environments
+venv/
+.venv/
+env/

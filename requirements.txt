@@ -3,3 +3,4 @@ pandas>=1.5
 scipy>=1.10
 statsmodels>=0.14
 streamlit>=1.32
+openpyxl>=3.1
