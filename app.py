@@ -9,9 +9,29 @@ import pandas as pd
 import streamlit as st
 
 from auto_arima_engine import AutoARIMAEngine
+from top10_diseases_dashboard import generate_dashboard_bytes
 
 
 st.set_page_config(page_title="Automated ARIMA Engine", layout="wide")
+
+# ── Sidebar: Top 10 Diseases Dashboard download ──────────────────────────
+
+@st.cache_data
+def _cached_dashboard_bytes() -> bytes:
+    return generate_dashboard_bytes()
+
+with st.sidebar:
+    st.header("📊 Top 10 Diseases Dashboard")
+    st.caption(
+        "Download an Excel workbook with data and charts on the "
+        "top 10 causes of death worldwide (WHO Global Health Estimates)."
+    )
+    st.download_button(
+        label="⬇️ Download Excel Dashboard",
+        data=_cached_dashboard_bytes(),
+        file_name="top10_diseases_dashboard.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    )
 
 
 def _build_demo_series(n: int = 240) -> pd.DataFrame:
